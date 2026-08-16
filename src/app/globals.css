@@ -1,0 +1,177 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------------------
+ * 设计令牌（Design Tokens）
+ * 所有颜色、圆角、字体均在此集中定义，替换品牌色只需修改 :root 下的变量。
+ * ------------------------------------------------------------------------- */
+
+:root {
+  --radius: 0.5rem;
+
+  --background: hsl(210 33% 98%);
+  --foreground: hsl(215 28% 17%);
+
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(215 28% 17%);
+
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(215 28% 17%);
+
+  /* 品牌主色 —— 工业钢蓝 */
+  --primary: hsl(208 62% 40%);
+  --primary-foreground: hsl(0 0% 100%);
+
+  --secondary: hsl(210 25% 94%);
+  --secondary-foreground: hsl(214 32% 24%);
+
+  --muted: hsl(210 25% 95%);
+  --muted-foreground: hsl(215 16% 46%);
+
+  /* 强调色 —— 询盘转化橙色 */
+  --accent: hsl(24 90% 52%);
+  --accent-foreground: hsl(0 0% 100%);
+
+  --destructive: hsl(0 72% 51%);
+  --destructive-foreground: hsl(0 0% 100%);
+
+  --border: hsl(214 22% 88%);
+  --input: hsl(214 22% 84%);
+  --ring: hsl(208 62% 40%);
+
+  /* 深色区块（企业实力、页脚、英雄区背景） */
+  --navy: hsl(211 55% 16%);
+  --navy-deep: hsl(212 60% 11%);
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", "Roboto Mono",
+    Menlo, Consolas, monospace;
+}
+
+.dark {
+  --background: hsl(215 30% 10%);
+  --foreground: hsl(210 20% 96%);
+  --card: hsl(214 30% 13%);
+  --card-foreground: hsl(210 20% 96%);
+  --popover: hsl(214 30% 13%);
+  --popover-foreground: hsl(210 20% 96%);
+  --primary: hsl(208 70% 55%);
+  --primary-foreground: hsl(215 30% 10%);
+  --secondary: hsl(214 28% 20%);
+  --secondary-foreground: hsl(210 20% 96%);
+  --muted: hsl(214 28% 20%);
+  --muted-foreground: hsl(213 14% 64%);
+  --accent: hsl(24 90% 52%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 62% 45%);
+  --destructive-foreground: hsl(210 20% 96%);
+  --border: hsl(214 24% 24%);
+  --input: hsl(214 24% 26%);
+  --ring: hsl(208 70% 55%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* 品牌色阶（供 bg-brand-* / text-brand-* 使用） */
+@theme {
+  --color-brand-50: #f3f7fb;
+  --color-brand-100: #e4eef7;
+  --color-brand-200: #c5dcee;
+  --color-brand-300: #94c0e0;
+  --color-brand-400: #5c9fce;
+  --color-brand-500: #3783b9;
+  --color-brand-600: #2769a5; /* == --primary */
+  --color-brand-700: #215486;
+  --color-brand-800: #1f476f;
+  --color-brand-900: #1d3c5d;
+  --color-brand-950: #14283e;
+
+  --color-signal-50: #fff7ed;
+  --color-signal-100: #ffedd5;
+  --color-signal-200: #fed7aa;
+  --color-signal-300: #fdba74;
+  --color-signal-400: #fb923c;
+  --color-signal-500: #f97316;
+  --color-signal-600: #ea580c;
+  --color-signal-700: #c2410c;
+  --color-signal-800: #9a3412;
+  --color-signal-900: #7c2d12;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+  ::selection {
+    background-color: hsl(208 62% 40% / 0.9);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  /* 工业蓝图网格纹理 */
+  .bg-blueprint {
+    background-image:
+      linear-gradient(to right, hsl(210 30% 94% / 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(210 30% 94% / 0.6) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .bg-blueprint-dark {
+    background-image:
+      linear-gradient(to right, hsl(210 40% 100% / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(210 40% 100% / 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  /* 细横线纹理（钢材拉丝感） */
+  .bg-hairline {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0,
+      transparent 6px,
+      hsl(210 20% 90% / 0.7) 6px,
+      hsl(210 20% 90% / 0.7) 7px
+    );
+  }
+}
