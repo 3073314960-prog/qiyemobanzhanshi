@@ -27,6 +27,11 @@ export function buildMetadata({
 }: BuildMetadataOptions = {}): Metadata {
   const fullTitle = title ? `${title} - ${siteConfig.name}` : `${siteConfig.name} - ${siteConfig.slogan}`;
   const url = absoluteUrl(path);
+  const imageUrl = image
+    ? image.startsWith("http")
+      ? image
+      : absoluteUrl(image)
+    : undefined;
 
   return {
     title: fullTitle,
@@ -41,13 +46,15 @@ export function buildMetadata({
       siteName: siteConfig.name,
       title: fullTitle,
       description,
-      images: image ? [{ url: image, width: 1200, height: 630, alt: fullTitle }] : undefined,
+      images: imageUrl
+        ? [{ url: imageUrl, width: 1200, height: 630, alt: fullTitle }]
+        : undefined,
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: image ? [image] : undefined,
+      images: imageUrl ? [imageUrl] : undefined,
     },
     robots: noIndex
       ? { index: false, follow: false }

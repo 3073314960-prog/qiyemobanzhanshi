@@ -5,6 +5,8 @@ import { products } from "@/config/products";
 import { caseStudies } from "@/config/cases";
 import { newsArticles } from "@/config/news";
 
+export const dynamic = "force-static";
+
 const base = siteConfig.url.replace(/\/$/, "");
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -25,7 +25,8 @@ export const siteConfig = {
     "专注高端数控装备、工业自动化与精密零部件制造，为汽车、航空航天、新能源与 3C 电子等行业提供可信赖的智能制造解决方案。",
 
   /* ------------------------------- SEO 默认值 ------------------------------ */
-  url: "https://www.huayu-precision.com",
+  // 站点域名：可在构建时通过 NEXT_PUBLIC_SITE_URL 覆盖（例如 GitHub Pages 子路径部署）。
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.huayu-precision.com",
   locale: "zh_CN",
   description:
     "华域精工是一家高端工业装备与智能制造解决方案提供商，主营五轴数控加工中心、工业机器人、自动化产线及精密零部件，服务汽车、航空航天、新能源、3C 电子等行业的标杆客户。",
